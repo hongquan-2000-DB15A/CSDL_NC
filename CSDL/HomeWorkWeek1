@@ -1,0 +1,29 @@
+use qldl;
+
+drop procedure pro_Salary ;
+delimiter $$
+create procedure pro_Salary ()
+begin
+ select first_name ,last_name ,(year(curdate()) - year(hire_date)) as years ,
+case 
+when (year(curdate()) - year(hire_date)) >= 9 then 12000
+when (year(curdate()) - year(hire_date)) > 6 then 8000
+when (year(curdate()) - year(hire_date)) > 4 then 6000
+else 5000
+end as bonus from employees;
+end;
+$$
+
+call pro_Salary();
+
+drop procedure  Pro_Search_name ;
+delimiter $$ 
+
+create procedure Pro_Search_name (Fname varchar(20))
+begin
+select CONCAT(first_name , " ", last_name) as full_name ,email, phone_number, hire_date, job_id, salary, manager_id, department_id 
+from employees where first_name = Fname ;
+end ;
+$$
+
+call Pro_Search_name('Adam') ;
