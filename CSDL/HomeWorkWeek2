@@ -1,0 +1,5 @@
+CREATE EVENT DayOn
+         ON SCHEDULE every 1 minute
+         starts current_timestamp()
+         ends '2023-02-16 12:10:00'
+         DO update employees set email= '123@gmail.com';
